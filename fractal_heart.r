@@ -1,4 +1,3 @@
-
 # setwd()
 
 heart <- function(t) {
@@ -43,7 +42,7 @@ plotHeart <- function(min=-100        # min of t
   
   M <- matrix(0, nrow=matsize, ncol=matsize)
   for(j in 1:matsize){
-    M[floor(p$x_resise[j]), floor(p$y_resise[j])] <- 1
+    M[floor(x_resise[j]), floor(y_resise[j])] <- 1
   }
   
   # deleting some points in the center
@@ -55,7 +54,7 @@ plotHeart <- function(min=-100        # min of t
       M[,k] <- 0
     }
   }
-
+  
   return(list(x=x, y=y, x_resise=x_resise, y_resise=y_resise, M=M))
 }
 
@@ -121,22 +120,22 @@ gpBrownianTree1 <- function(M                 # matrix returned from plotHeart
   cat(" *** START:", date(),"m=",m,"n=",n,"col=",col,"\n");
   # Main loops: Generating matrix M
   for (i in 1:n) {
-    if(i>1) {
-      x = sample(1:m, 1, replace=F)
-      y = sample(1:m, 1, replace=F)
+    if(i >= 1) {
+      x <- sample(1:m, 1, replace=F)
+      y <- sample(1:m, 1, replace=F)
     }
     while(1) {
-      ox=x;
-      oy=y;
-      x = x + sample(-1:1, 1, replace=F);
-      y = y + sample(-1:1, 1, replace=F);
-      if(x<=m && y<=m && x>0 && y>0 && M[x,y]){
-        if(ox<=m && oy<=m && ox>0 && oy>0){
-          M[ox,oy]=1;
+      ox <- x;
+      oy <- y;
+      x <- x + sample(-1:1, 1, replace=F);
+      y <- y + sample(-1:1, 1, replace=F);
+      if(x <= m && y <= m && x > 0 && y > 0 && M[x,y]){
+        if(ox <= m && oy <= m && ox > 0 && oy > 0){
+          M[ox,oy] <- 1;
           break
         }
       }
-      if(!(x<=m && y<=m && x>0 && y>0)) {break}
+      if(!(x <= m && y <= m && x > 0 && y > 0)) {break}
     }
   }
   plotmat(M, col=col, export=export, exName=exName, matsize=m, pch=pch, cex=cex, title=title);
@@ -159,10 +158,4 @@ for(i in seq(100,400,50)){
 p <- plotHeart(min=-100, max=100, count=300, matsize=400, col="maroon", bg="bisque", pch=20, cex=-0.1, type="l")
 plotmat(p$M)
 par(mfrow=c(1,1))
-gpBrownianTree1(p$M, 50000, "maroon", 0, "", 20, 0.6, NULL)
-
-
-
-
-
-
+gpBrownianTree1(p$M, 40000, "maroon", 0, "", 20, 0.8, NULL)
