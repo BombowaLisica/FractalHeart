@@ -159,3 +159,30 @@ p <- plotHeart(min=-100, max=100, count=300, matsize=400, col="maroon", bg="bisq
 plotmat(p$M)
 par(mfrow=c(1,1))
 gpBrownianTree1(p$M, 40000, "maroon", 0, "", 20, 0.8, NULL)
+
+
+
+#################################################################
+
+t = seq(-pi, pi, 0.00001)
+d <- data.frame(t = t, x = heart(t)$x, y = heart(t)$y)
+
+with(d, plot(x, y, type = "l", axes = FALSE, xlab = "", ylab = ""
+             , xlim = c(-17, 17), ylim = c(-19, 13)
+             , col = "maroon", lwd = 2
+             , yaxs = "i"))
+par(xaxp = c(-18, 18, 36)
+    , yaxp = c(-19, 13, 32)
+    , tck = 0.005)
+axis(1, pos=0, label = FALSE)
+axis(2, pos=0, label = FALSE, yaxs = "i")
+
+xtext = expression(paste("x = 16sin" ^ "3", "(t)"))
+ytext = expression(paste("y = 13cos(t) - 5cos(2t) - 2cos(3t) - cos(4t)"))
+
+fonts <- list(mono = "Consolas")
+par(family = "mono")
+mtext(xtext, side=1, line=0.5, at=-15)
+mtext(ytext, side=1, line=1.5, at=-8)
+
+
